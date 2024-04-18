@@ -1,9 +1,6 @@
 package com.tpe.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +18,7 @@ public class Hotel {
     private String location;
 
     //todo: one-to-many
+    @OneToMany(mappedBy = "hotel")//hotel ile room arasında ilişki kurulmasını sağlar: ilişki tablosu ekler
     private List<Room> rooms = new ArrayList<>();
 
 

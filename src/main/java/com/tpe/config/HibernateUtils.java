@@ -27,9 +27,6 @@ public class HibernateUtils {
         } catch (Exception e){
             System.err.println("Initialization of session factory is FAILED!!!");
         }
-
-
-
     }
 
     //getter SF

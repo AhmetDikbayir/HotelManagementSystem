@@ -5,11 +5,13 @@ import com.tpe.domain.Hotel;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 public class HotelRepository {
 
     private Session session;
     //1-b
-    public void saveHotel(Hotel hotel){
+    public void save(Hotel hotel){
         try {
             session = HibernateUtils.getSessionFactory().openSession();
             Transaction tx = session.beginTransaction();
@@ -19,9 +21,34 @@ public class HotelRepository {
             System.out.println(e.getMessage());
         }finally {
             HibernateUtils.closeSession(session);
-
         }
+    }
 
+    //2-b
+    public Hotel findById(Long id){
+        try {
+            session = HibernateUtils.getSessionFactory().openSession();
+            //select * from t_hotel where id=p_Id
+            return session.get(Hotel.class, id);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }finally {
+            HibernateUtils.closeSession(session);
+        }
+        return null;
+    }
 
+    //3-b
+    public List<Hotel> findAll(){
+        try {
+            session = HibernateUtils.getSessionFactory().openSession();
+            List<Hotel> hotelList = session.createQuery("FROM Hotel", Hotel.class).getResultList();
+            return hotelList;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }finally {
+            HibernateUtils.closeSession(session);
+        }
+        return null;
     }
 }
