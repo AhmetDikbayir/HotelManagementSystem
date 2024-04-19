@@ -57,9 +57,7 @@ public class HotelManagementSystem {
                     System.out.println("Invalid choice, please try again ");
                     break;
             }
-
         }
-
     }
 
     //hotel operations
@@ -96,7 +94,11 @@ public class HotelManagementSystem {
                     hotelService.findHotelById(id);
                     break;
                 case 3:
-
+                    //7-a: hotel silme
+                    System.out.println("Enter hotel ID : ");
+                    Long hotelid= scanner.nextLong();
+                    scanner.nextLine();
+                    hotelService.deleteHotel(hotelid);
                     break;
                 case 4:
                     //3 a : tüm otelleri listeleme
@@ -104,7 +106,12 @@ public class HotelManagementSystem {
 
                     break;
                 case 5:
+                    //8-a: hotel güncelleme
+                    System.out.println("Enter hotel ID : ");
+                    Long updatedHotelId = scanner.nextLong();
+                    scanner.nextLine();
 
+                    hotelService.updateHotelById(updatedHotelId);
                     break;
                 case 0:
                     exit = true;
@@ -120,8 +127,6 @@ public class HotelManagementSystem {
 
     //room operations
     private static void displayRoomOperationsMenu(RoomService roomService) {
-
-
 
         System.out.println("Room Operation Menu");
         boolean exit = false;
@@ -148,9 +153,9 @@ public class HotelManagementSystem {
                     Long roomId = scanner.nextLong();
                     scanner.nextLine();
                     roomService.findRoomById(roomId);
-
                     break;
                 case 3:
+                    //ödev
 
                     break;
                 case 4:
@@ -191,12 +196,14 @@ public class HotelManagementSystem {
 
                     break;
                 case 2:
+                    //ödev
 
                     break;
                 case 3:
 
                     break;
                 case 4:
+                    //ödev
 
                     break;
                 case 0:
@@ -232,12 +239,14 @@ public class HotelManagementSystem {
 
                     break;
                 case 2:
+                    //ödev
 
                     break;
                 case 3:
 
                     break;
                 case 4:
+                    //ödev
 
                     break;
                 case 0:
@@ -250,7 +259,5 @@ public class HotelManagementSystem {
                     break;
             }
         }
-
     }
-
 }

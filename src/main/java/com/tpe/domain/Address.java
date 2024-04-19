@@ -2,7 +2,7 @@ package com.tpe.domain;
 
 import javax.persistence.Embeddable;
 
-@Embeddable
+@Embeddable//opsiyonel
 public class Address {
     private String street;
     private String city;

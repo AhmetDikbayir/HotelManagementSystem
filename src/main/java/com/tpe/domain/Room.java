@@ -21,6 +21,7 @@ public class Room {
     private Hotel hotel;
 
     //todo: one to many
+    @OneToMany(mappedBy = "room", orphanRemoval = true)
     private List<Reservation> reservations = new ArrayList<>();
 
     public Room() {

@@ -17,8 +17,14 @@ public class Hotel {
     @Column(nullable = false)
     private String location;
 
-    //todo: one-to-many
-    @OneToMany(mappedBy = "hotel")//hotel ile room arasında ilişki kurulmasını sağlar: ilişki tablosu ekler
+    //orphanRemoval
+    //A otelinin odaları: 11-12-13
+    //A otelinin oda listesinden 11 i çıkarırsam: room tabledan 11 i siler
+
+    //cascade:
+    //A otelinin odaları: 11-12-13
+    //A otelinin oda listesinden 11 i çıkarırsam: room tableda 11 hala vardır.
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.REMOVE)//hotel ile room arasında ilişki kurulmasını sağlar: ilişki tablosu ekler
     private List<Room> rooms = new ArrayList<>();
 
 

@@ -91,7 +91,7 @@ public class RoomService {
                 System.out.println(room);
             }
         }else {
-            System.out.println("Room list is empty!");
+            System.out.println("No rooms found!");
         }
 
     }

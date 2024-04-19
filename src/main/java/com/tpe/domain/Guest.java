@@ -14,14 +14,19 @@ public class Guest {
     @Column(nullable = false)
     private String name;
 
-    //todo:
     private LocalDateTime createDate;
 
-    //todo:
+
+    @OneToMany(mappedBy = "guest", orphanRemoval = true) //tablo ile ilişkiyi kurar: gerek yok
     private List<Reservation> reservations = new ArrayList<>();
 
     @Embedded
     private Address address;
+
+    @PrePersist
+    public void prePersist(){
+        this.createDate=LocalDateTime.now();
+    }
 
 
     // Getter - Setter *************
@@ -45,9 +50,10 @@ public class Guest {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
+    //public void setCreateDate(LocalDateTime createDate) {
+//        this.createDate = createDate;
+//    }
+
 
     public List<Reservation> getReservations() {
         return reservations;
