@@ -49,4 +49,18 @@ public class GuestRepository {
             HibernateUtils.closeSession(session);
         }
     }
+
+    //9-c
+    public void save(Guest guest) {
+        try {
+            session = HibernateUtils.getSessionFactory().openSession();
+            Transaction tx = session.beginTransaction();
+            session.save(guest);
+            tx.commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }finally {
+            HibernateUtils.closeSession(session);
+        }
+    }
 }

@@ -26,10 +26,10 @@ public class HotelManagementSystem {
         RoomService roomService = new RoomService(hotelService,roomRepository);
 
         GuestRepository guestRepository = new GuestRepository();
-        GuestService guestService = new GuestService(hotelService, roomService, guestRepository);
+        GuestService guestService = new GuestService(guestRepository);
 
         ReservationRepository reservationRepository = new ReservationRepository();
-        ReservationService reservationService = new ReservationService();
+        ReservationService reservationService = new ReservationService(reservationRepository, guestService, roomService);
 
         boolean exit = false;
         while(!exit){
@@ -201,7 +201,8 @@ public class HotelManagementSystem {
 
             switch (choice) {
                 case 1:
-
+                    //9-a guest kaydetme
+                    guestService.saveGuest();
                     break;
                 case 2:
                     System.out.println("Enter guest ID : ");
@@ -211,9 +212,9 @@ public class HotelManagementSystem {
                     break;
                 case 3:
                     System.out.println("Enter guest ID : ");
-                    Long idOfGuest = scanner.nextLong();
+                    Long id = scanner.nextLong();
                     scanner.nextLine();
-                    guestService.deleteGuests(idOfGuest);
+                    guestService.deleteGuestById(id);
                     break;
                 case 4:
                     guestService.getAllGuests();
@@ -247,7 +248,8 @@ public class HotelManagementSystem {
 
             switch (choice) {
                 case 1:
-
+                    //11- a : reservation olusturma
+                    reservationService.createReservation();
                     break;
                 case 2:
                     System.out.println("Enter reservation ID : ");
@@ -259,8 +261,9 @@ public class HotelManagementSystem {
                     break;
                 case 4:
                     System.out.println("Enter reservation ID : ");
-                    Long reservationOfId = scanner.nextLong();
-                    reservationService.deleteReservation(reservationOfId);
+                    Long id = scanner.nextLong();
+                    scanner.nextLine();
+                    reservationService.deleteReservationById(id);
                     break;
                 case 0:
                     exit = true;

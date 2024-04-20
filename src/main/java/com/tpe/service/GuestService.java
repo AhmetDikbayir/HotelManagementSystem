@@ -1,5 +1,6 @@
 package com.tpe.service;
 
+import com.tpe.domain.Address;
 import com.tpe.domain.Guest;
 import com.tpe.exceptions.GuestNotFoundException;
 import com.tpe.repository.GuestRepository;
@@ -10,13 +11,9 @@ import java.util.Scanner;
 public class GuestService {
 
     private final Scanner scanner = new Scanner(System.in);
-    private final HotelService hotelService;
-    private final RoomService roomService;
     private final GuestRepository guestRepository;
 
-    public GuestService(HotelService hotelService, RoomService roomService, GuestRepository guestRepository) {
-        this.hotelService = hotelService;
-        this.roomService = roomService;
+    public GuestService(GuestRepository guestRepository) {
         this.guestRepository = guestRepository;
     }
 
@@ -50,21 +47,37 @@ public class GuestService {
         }
     }
 
-    public void deleteGuests(Long idOfGuest) {
-        Guest foundGuest = findGuestById(idOfGuest);
-
+    public void deleteGuestById(Long id) {
+        Guest foundGuest = findGuestById(id);
+        //guestin rezervasyonları varsa orphanremoval attribute ile bunlar otomatik silinsin
         if(foundGuest != null){
-            System.out.println(foundGuest);
-            System.out.println("Are sure to delete : ");
-            System.out.println("Please answer with Y or N");
-            String select = scanner.nextLine();
-
-            if(select.equalsIgnoreCase("Y")){
-                guestRepository.delete(foundGuest);
-                System.out.println("Guest is deleted successfully!");
-            }else {
-                System.out.println("Delete operation is cancelled!!");
-            }
+            guestRepository.delete(foundGuest);
+            System.out.println("Guest is removed successfully..Guest id : "+foundGuest.getId());
         }
+    }
+
+    //9-b
+    public void saveGuest() {
+        Guest guest = new Guest();
+        System.out.println("Enter guest name : ");
+        guest.setName(scanner.nextLine());
+
+        Address address = new Address();
+
+        System.out.println("Enter street : ");
+        address.setStreet(scanner.nextLine());
+
+        System.out.println("Enter city : ");
+        address.setCity(scanner.nextLine());
+
+        System.out.println("Enter country : ");
+        address.setCountry(scanner.nextLine());
+
+        System.out.println("Enter zipcode : ");
+        address.setZipcode(scanner.nextInt());
+        guest.setAddress(address);
+
+        guestRepository.save(guest);
+        System.out.println("Guest is saved successfully...");
     }
 }

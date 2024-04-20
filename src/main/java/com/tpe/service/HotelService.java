@@ -94,7 +94,7 @@ public class HotelService {
             existingHotel.setName(scanner.nextLine());
             System.out.println("Enter the new hotel location : ");
             existingHotel.setLocation(scanner.nextLine());
-            hotelRepository.updateHotel();
+            hotelRepository.updateHotel(existingHotel);
             System.out.println("Hotel is updated successfully");
         }
     }

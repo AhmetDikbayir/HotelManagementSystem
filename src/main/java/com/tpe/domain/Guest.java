@@ -8,7 +8,8 @@ import java.util.List;
 @Entity
 @Table(name = "t_guest")
 public class Guest {
-    @Id
+    @Id//pk
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
