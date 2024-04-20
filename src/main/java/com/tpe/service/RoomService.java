@@ -2,7 +2,6 @@ package com.tpe.service;
 
 import com.tpe.domain.Hotel;
 import com.tpe.domain.Room;
-import com.tpe.exceptions.HotelNotFoundException;
 import com.tpe.exceptions.RoomNotFoundException;
 import com.tpe.repository.RoomRepository;
 
@@ -94,5 +93,23 @@ public class RoomService {
             System.out.println("No rooms found!");
         }
 
+    }
+
+    public void deleteRoom(Long roomOfId) {
+        Room foundRoom = findRoomById(roomOfId);
+
+        if(foundRoom != null){
+            System.out.println(foundRoom);
+            System.out.println("Are sure to delete : ");
+            System.out.println("Please answer with Y or N");
+            String select = scanner.nextLine();
+
+            if(select.equalsIgnoreCase("Y")){
+                roomRepository.delete(foundRoom);
+                System.out.println("Room is deleted successfully!");
+            }else {
+                System.out.println("Delete operation is CANCELLED!");
+            }
+        }
     }
 }

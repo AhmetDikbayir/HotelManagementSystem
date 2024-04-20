@@ -11,7 +11,6 @@ import java.util.List;
 
 public class RoomRepository {
 
-    //ÖDEV : save, findById, findAll
     private Session session;
 
     //4-c
@@ -27,8 +26,6 @@ public class RoomRepository {
             HibernateUtils.closeSession(session);
         }
     }
-
-
 
     public Room findById(Long id){
         try {
@@ -55,5 +52,16 @@ public class RoomRepository {
         return null;
     }
 
-
+    public void delete(Room room) {
+        try{
+            session = HibernateUtils.getSessionFactory().openSession();
+            Transaction tx = session.beginTransaction();
+            session.delete(room);
+            tx.commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }finally {
+            HibernateUtils.closeSession(session);
+        }
+    }
 }
